@@ -1,0 +1,12 @@
+{
+	"name": "audit-detects-drift",
+	"description": "Editing a base-managed file locally must be reported as locally-modified by the audit.",
+	"steps": [
+		"cd eval-plugin",
+		"echo '# local change' >> .github/pull_request_template.md",
+		"node scripts/base-audit.mjs --json"
+	],
+	"expect": {
+		"audit.files['.github/pull_request_template.md'].status": "locally-modified"
+	}
+}

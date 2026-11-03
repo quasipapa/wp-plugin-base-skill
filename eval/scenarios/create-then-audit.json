@@ -1,0 +1,12 @@
+{
+	"name": "create-then-audit",
+	"description": "Creating a plugin from the template and auditing it immediately must report all managed files unchanged and no upgrade available.",
+	"steps": [
+		"node skills/wp-plugin-base/scripts/create.mjs --name 'Eval Plugin' --slug eval-plugin --author quasipapa --repo quasipapa/eval-plugin --public --base v0.1.0",
+		"cd eval-plugin && node scripts/base-audit.mjs --json"
+	],
+	"expect": {
+		"audit.files.*.status": "unchanged",
+		"audit.upgradeAvailable": null
+	}
+}
